@@ -1,9 +1,9 @@
-window.addEventListener('beforeunload', function(e){
-  e.preventDefault();
-  e.returnValue = '';
-})
+// window.addEventListener("beforeunload", function (e) {
+//   e.preventDefault();
+//   e.returnValue = "";
+// });
 
-let user_db = {};
+let user_db = JSON.parse(localStorage.getItem("user_db")) || {};
 
 class User {
   constructor(uid, username, password, loggedIn, balance, email) {
@@ -15,7 +15,9 @@ class User {
     this.email = email;
   }
 }
-curr_uid = 1;
+
+let curr_uid = parseInt(localStorage.getItem("curr_uid")) || 1;
+
 let user1 = new User(
   0,
   "thulasi",
@@ -24,33 +26,10 @@ let user1 = new User(
   3000,
   "thulasikanswe@gmail.com"
 );
+
 user_db[0] = user1;
-// console.log("User object", user_db );
-//login function
-function login() {
-  const user_name = document.getElementById("user_name");
-  const user_password = document.getElementById("user_password");
 
-  // checking for the username & password in the database
-  for (const key in user_db) {
-    if (
-      user_db[key].username === user_name.value &&
-      user_db[key].password === user_password.value
-    ) {
-      user_db[key].loggedin = true;
-
-      console.log(user_db[key].loggedin);
-      
-    }
-    // do this if user not found
-    else {
-      alert("User not Found | SignIn first");
-      console.log(user_db[key].username, user_db[key].password);
-      
-    }
-  }
-}
-// functions to validate user's email address and password's format
+//functions to validate user's email address and password's format
 function validate_email(address) {
   // Regular expression pattern for email validation
   let emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -70,7 +49,29 @@ function validate_password(password) {
   }
 }
 
-// function to sign In | user have to login to access his account
+function login(event) {
+  let user_name = document.getElementById("user_name");
+  let user_password = document.getElementById("user_password");
+
+  // Checking for the username & password in the database
+  for (let key in user_db) {
+    if (
+      user_db[key].username === user_name.value &&
+      user_db[key].password === user_password.value
+    ) {
+      user_db[key].loggedin = true;
+      console.log(user_db[key].loggedin);
+
+      // Save the updated user_db to Local Storage
+      localStorage.setItem("user_db", JSON.stringify(user_db));
+
+      return;
+    }
+  }
+  // Do this if user not found
+  alert("User not Found | Sign In first");
+}
+
 function signUp() {
   const new_username = document.getElementById("new_user_name");
   const new_user_email = document.getElementById("new_user_email");
@@ -79,7 +80,7 @@ function signUp() {
   for (const key in user_db) {
     if (user_db[key].email == new_user_email.value) {
       alert("User already exists !");
-       
+      return;
     }
   }
 
@@ -96,10 +97,15 @@ function signUp() {
       0,
       new_user_email.value
     );
+
     user_db[newUser.uid] = newUser;
-    console.log(user_db);
-    curr_uid += 1 ;
+    curr_uid++;
+
+    // Save the updated user_db and curr_uid to Local Storage
+    localStorage.setItem("user_db", JSON.stringify(user_db));
+    localStorage.setItem("curr_uid", curr_uid.toString());
   } else {
     alert("Invalid Credentials");
   }
 }
+ 
