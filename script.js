@@ -1,6 +1,6 @@
 // window.addEventListener("beforeunload", function (e) {
 //   e.preventDefault();
-//   e.returnValue = "";
+//   e.returnValue = ''
 // });
 // exporting user_name for dash board use
 
@@ -61,6 +61,7 @@ function login() {
       user_db[key].password === user_password.value
     ) {
       let user_email = user_db[key].email;
+      let user_uid = user_db[key].uid;
       console.log(user_email)
       user_db[key].loggedin = true;
       console.log(user_db[key].loggedin);
@@ -72,7 +73,8 @@ function login() {
       //setItem("user_db", JSON.stringify(user_db)): This method call is used to store a value in localStorage.
       //The method takes two arguments:"user_db": This is the key or name under which the data will be stored in localStorage. It's similar to a variable name.JSON.stringify(user_db): The value associated with the key is the serialized form of the user_db object. The JSON.stringify() function is used to convert the JavaScript object (user_db) into a JSON string. This is necessary because localStorage can only store string values.
       localStorage.setItem("user_db", JSON.stringify(user_db));
-      localStorage.setItem('disp_user_email', user_email)
+      localStorage.setItem('disp_user_email', user_email);
+      localStorage.setItem('user_uid', user_uid);
 
       // Redirect to the dashboard page//
       window.location.href = "dashboard.html";
@@ -81,7 +83,7 @@ function login() {
     }
   }
   // Do this if user not found
-  alert("User not Found | Sign In first");
+  alert("Incorrect Username or Password ");
 }
 
 function signUp() {
