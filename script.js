@@ -2,6 +2,7 @@
 //   e.preventDefault();
 //   e.returnValue = "";
 // });
+// exporting user_name for dash board use
 
 let user_db = JSON.parse(localStorage.getItem("user_db")) || {};
 
@@ -49,7 +50,7 @@ function validate_password(password) {
   }
 }
 
-function login(event) {
+function login() {
   let user_name = document.getElementById("user_name");
   let user_password = document.getElementById("user_password");
 
@@ -59,11 +60,22 @@ function login(event) {
       user_db[key].username === user_name.value &&
       user_db[key].password === user_password.value
     ) {
+      let user_email = user_db[key].email;
+      console.log(user_email)
       user_db[key].loggedin = true;
       console.log(user_db[key].loggedin);
 
       // Save the updated user_db to Local Storage
+      //localStorage: localStorage is a built-in web storage object provided by web browsers.
+      //It allows you to store key-value pairs locally on the user's browser.
+      //The data stored in localStorage persists even after the browser is closed.
+      //setItem("user_db", JSON.stringify(user_db)): This method call is used to store a value in localStorage.
+      //The method takes two arguments:"user_db": This is the key or name under which the data will be stored in localStorage. It's similar to a variable name.JSON.stringify(user_db): The value associated with the key is the serialized form of the user_db object. The JSON.stringify() function is used to convert the JavaScript object (user_db) into a JSON string. This is necessary because localStorage can only store string values.
       localStorage.setItem("user_db", JSON.stringify(user_db));
+      localStorage.setItem('disp_user_email', user_email)
+
+      // Redirect to the dashboard page//
+      window.location.href = "dashboard.html";
 
       return;
     }
@@ -108,4 +120,3 @@ function signUp() {
     alert("Invalid Credentials");
   }
 }
- 
