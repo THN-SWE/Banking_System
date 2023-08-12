@@ -4,7 +4,8 @@
 // });
 // exporting user_name for dash board use
 
-let user_db = JSON.parse(localStorage.getItem("user_db")) || {};
+let user_db =  {};
+let curr_uid = parseInt(localStorage.getItem("curr_uid")) || 1;
 
 class User {
   constructor(uid, username, password, loggedIn, balance, email) {
@@ -17,7 +18,6 @@ class User {
   }
 }
 
-let curr_uid = parseInt(localStorage.getItem("curr_uid")) || 1;
 
 let user1 = new User(
   0,
