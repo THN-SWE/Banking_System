@@ -51,6 +51,8 @@ function validate_password(password) {
 }
 
 function login() {
+  user_db = JSON.parse(localStorage.user_db);
+
   let user_name = document.getElementById("user_name");
   let user_password = document.getElementById("user_password");
 
@@ -87,6 +89,8 @@ function login() {
 }
 
 function signUp() {
+  user_db = JSON.parse(localStorage.user_db);
+
   const new_username = document.getElementById("new_user_name");
   const new_user_email = document.getElementById("new_user_email");
   const new_user_password = document.getElementById("new_user_password");
