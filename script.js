@@ -74,7 +74,7 @@ function login() {
       //The data stored in localStorage persists even after the browser is closed.
       //setItem("user_db", JSON.stringify(user_db)): This method call is used to store a value in localStorage.
       //The method takes two arguments:"user_db": This is the key or name under which the data will be stored in localStorage. It's similar to a variable name.JSON.stringify(user_db): The value associated with the key is the serialized form of the user_db object. The JSON.stringify() function is used to convert the JavaScript object (user_db) into a JSON string. This is necessary because localStorage can only store string values.
-      localStorage.setItem("user_db", JSON.stringify(user_db));
+      localStorage.setItem('user_db', JSON.stringify(user_db));
       localStorage.setItem('disp_user_email', user_email);
       localStorage.setItem('user_uid', user_uid);
 
