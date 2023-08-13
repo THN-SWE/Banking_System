@@ -18,9 +18,10 @@
     <!-- navbar start -->
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"> Banking System </a>
+        <a class="navbar-brand" href="#" onclick="logout()"> Banking System </a>
         <p id="disp_user_name"></p>
       </div>
+ 
     </nav>
     <!-- nav bar end -->
     <h1 id="login_text">Dashboard</h1>
@@ -149,16 +150,32 @@
           class="accordion-collapse collapse"
           data-bs-parent="#accordionExample"
         >
-          <div class="accordion-body" id="user_transfer"><div class="input-group">
-             <input type="text" aria-label="whomtoSend" class="form-control" placeholder="Reciever's email address">
-            <input type="number" aria-label="amount" class="form-control" placeholder="Amount to tranfer">
-            <button
-            class="btn btn-outline-secondary"
-            type="button"
-            id="button-addon1"
-            onclick="transfer()"
-          >Transfer Money</button
-        </div></div>
+          <div class="accordion-body" id="user_transfer">
+            <div class="input-group">
+              <input
+                id="reciever_email"
+                type="text"
+                aria-label="whomtoSend"
+                class="form-control"
+                placeholder="Reciever's email address"
+              />
+              <input
+                id="transfer_amount"
+                type="number"
+                aria-label="amount"
+                class="form-control"
+                placeholder="Amount to tranfer"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-addon1"
+                onclick="transfer()"
+              >
+                Transfer Money
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
